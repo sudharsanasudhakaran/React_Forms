@@ -1,0 +1,140 @@
+<!-- <!-- <h1>{{title}}</h1>
+
+ -->
+<div class="row">
+  <div class="col-lg-6">
+    
+<form [formGroup]="userForm" (submit)="submitForm()">
+  <label for="username">User Name</label>
+  <input type="text" name="username" formControlName="name" />
+  <span *ngIf="!userForm.get('name').valid && userForm.get('name').dirty">Name should in length between 5 - 20 characters</span>
+  <span *ngIf="userForm.get('name').touched && !userForm.get('name').valid">This field is required</span>
+  <br />
+
+  <label for="email">email</label>
+  <input type="email" name="email" formControlName="email" />
+  <br />
+
+  <label for="dob">Date of Birth</label>
+  <input type="date" name="dob" formControlName="dob" />
+  <br />
+
+  <label for="country">Country</label>
+  <select name="country" id="" formControlName="country">
+    <option value="IN">India</option>
+    <option value="US">America</option>
+    <option value="ARG">Argentina</option>
+    <option value="MEX">MExico</option>
+    <option value="ESP">Spain</option>
+    <option value="ENG">England</option>
+  </select>
+  <br />
+  
+  <label for="gender">Gender:</label>
+  <div>
+  <input id="male" type="radio" value="male" name="gender" formControlName="gender">
+  <label for="male">Male</label>
+  </div>
+  <div>
+    <input id="female" type="radio" value="female" name="gender" formControlName="gender">
+    <label for="female">Female</label>
+    </div>
+    <div>
+      <input id="other" type="radio" value="other" name="gender" formControlName="gender">
+      <label for="other">Other</label>
+      </div>
+  <br/>
+  
+  <label for="marital">Marital status</label>
+  <div>
+  <input id="married" type="radio" value="married" name="marital" formControlName="gender">
+  <label for="married">Married</label>
+  </div>
+  <div>
+    <input id="unmarried" type="radio" value="unmarried" name="gender" formControlName="gender">
+    <label for="unmarried">Unmarried</label>
+    </div>
+    <div>
+      <input id="other" type="radio" value="other" name="gender" formControlName="gender">
+      <label for="other">Other</label>
+      </div>
+  <br/>
+  <label for="favfood">Fav Food</label>
+    <div>
+        <label class="checkbox-inline">
+            <input type="checkbox" name="FavFood" ng-model="userForm.FavFood.indian"/>Indian
+        </label>
+        <br/>
+        <label class="checkbox-inline">
+            <input type="checkbox" name="FavFood" ng-model="userForm.FavFood.Continental"/>Continental
+        </label>
+        <br/>
+        <label class="checkbox-inline">
+            <input type="checkbox" name="FavFood" ng-model="userForm.FavFood.Mexican"/>Mexican
+        </label>
+        <br/>
+        <label class ="checkbox-inline">
+          <input type="checkbox" name="FavFood" ng-model="userForm.FavFood.Italian"/>Italian
+        </label>   
+    </div>
+
+  <label for="">Mobile</label>
+  <input type="number" formControlName="mobile" />
+  <span *ngIf="userForm.get('name').touched && !userForm.get('name').valid">This field is required</span>
+
+  <br />
+
+  <h4>Address</h4>
+  <div formArrayName="address" *ngFor="let address of userForm.get('address')['controls'];let i = index">
+      <div [formGroupName]="i">
+        <label for="">Door Number</label>
+        <input type="text" formControlName="Door Number">
+        <br>
+        <label for="">Street</label>
+        <input type="text" formControlName="street">
+        <br>
+        <label for="">Zip Code</label>
+        <input type="text" formControlName="zipcode">
+      </div>
+      <hr>
+  </div>
+  <br>
+  {{userForm.valid}}
+  <br>
+  <input type="submit" value="Submit" />
+</form>
+
+  </div>
+  <div class="col-lg-6">
+    <table class="table table-striped" style="background-color: pink;">
+
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">E-mail</th>
+          <th scope="col">DOB</th>
+          <th scope="col">Country</th>
+          <th scope="col">Gender</th>
+          <th scope="col">Marital Status</th>
+          <th scope="col">Favourite Food</th>
+          <th scope="col">Mobile</th>
+          <th scope="col">Address</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of userDetails; let i= index">
+          <td>{{user.name}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.dob}}</td>
+          <td>{{user.country}}</td>
+          <td>{{user.gender}}</td>
+          <td>{{user.marital}}</td>
+          <td>{{user.favfood}}</td>
+          <td>{{user.mobile}}</td>
+          <td>{{user.address}}</td>
+          <td><button (click)="delete(i)">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
